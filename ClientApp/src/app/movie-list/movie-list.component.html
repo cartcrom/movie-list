@@ -1,0 +1,70 @@
+<p *ngIf="list != null">
+  <div class="limiter">
+    <div class="container-movielist">
+      <input #name [(ngModel)]="list.name" (keyup.enter)='changeName(name.value)' (input)="showConfirm()">
+      <input #confirmName type="image" (click)='changeName(name.value)' src="../../assets/confirm-button.png" alt="Add" style="display: none; max-width:10%; max-height:10%;">
+      <div class="wrap-movielist">
+        <br>
+        <div class="movielist m-b-110">
+          <table data-vertable="ver6">
+            <thead>
+              <tr class="movierow head">
+                <th class="column2" data-column="column2">Title</th>
+                <th class="column3" data-column="column3">Rating</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="movierow" *ngFor="let movie of list.movies; let i = index">
+                <td class="column2" (click)="showPoster(i)">{{ movie.title }}</td>
+                <td class="column3">
+                  <span class="rating">
+                    <app-rating [rating]='movie.rating' [itemId]='movie.id' (ratingClick)='updateRating($event, movie.id)'></app-rating>
+                  </span><span><img src="../../assets/delete.button.png" (click)='deleteMovie(i)' align="right" class="row2" alt="Delete"></span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <br>
+      </div>
+      <input type="image" (click)='showSearch()' src="../../assets/add.button.png" alt="Add" style="max-width:10%; max-height:10%;">
+
+      <br>
+
+    </div>
+  </div>
+
+  <div #searchBox class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Movie Search</h2>
+        <span class="close" (click)='closeSearch()'>&times;</span>
+      </div>
+      <br>
+      <div class="modal-body">
+        <app-search (onComplete)="addMovie($event)"></app-search>
+      </div>
+    </div>
+  </div>
+
+  <div #posterBox class="modal">
+    <!-- Modal content -->
+    <div class="modal-content" *ngIf="list.movies[currentMovieIndex] != undefined">
+
+      <div class="modal-header">
+        <h2><a href="https://www.imdb.com/title/{{list.movies[currentMovieIndex].imdbID}}/" target="_blank">{{list.movies[currentMovieIndex].title}} ({{list.movies[currentMovieIndex].year}})</a></h2>
+        <span class="close" (click)='closePoster()'>&times;</span>
+      </div>
+      <br>
+      <div class="modal-body poster">
+        <img src="{{list.movies[currentMovieIndex].poster}}" width="480" height="720">
+      </div>
+
+    </div>
+  </div>
+
+  <ng-template #elseBlock>
+    <em>Loading...</em>
+
+  </ng-template>

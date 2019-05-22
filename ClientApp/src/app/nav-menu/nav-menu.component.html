@@ -1,0 +1,17 @@
+<header>
+  <nav class='navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3'>
+    <span>
+      <img src="../../assets/Logo.PNG" alt="Logo" style="max-width:20%; max-height:20%;">
+    </span>
+      
+    <span class="a"><input type="image" src="../../assets/add.button.png" (click)='addClicked()' alt="Add" class="menu-button"></span>
+    <span class="a">
+      <div ngbDropdown #myDrop="ngbDropdown">
+        <input type="image" src="../../assets/list-button.png" alt="Lists" id="dropdownBasic1" class="menu-button" ngbDropdownToggle>
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <button *ngFor="let name of listNames; let i = index" (click)='changeClicked(i)' ngbDropdownItem>{{ name }}</button>
+        </div>
+      </div>
+    </span>
+  </nav>
+</header>

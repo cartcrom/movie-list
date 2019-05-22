@@ -1,0 +1,8 @@
+<body>
+  <app-nav-menu (selectList)="changeList($event)" (newList)="createList()" [listNames]= listNames></app-nav-menu>
+  <br>
+  <div class="container" style='padding: 0'>
+    <p *ngIf="movieLists != null">
+      <app-movie-list [list]=currentList></app-movie-list>
+  </div>
+</body>

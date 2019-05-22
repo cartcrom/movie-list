@@ -1,0 +1,13 @@
+<section class="filter-wrapper">
+  <div class="keyword-wrapper">
+    <input [formControl]="searchField" class = "input" type="text" id="keyword" placeholder="Enter Movie Name" autofocus/>
+  </div>
+  <ul class="filter-select">
+    <li *ngFor="let result of results; let i = index" class="filter-select-list" (click)='selectResult(i)'>
+      <img src="{{result.Poster}}" width="35" height="50">
+      <p class="title">{{result.Title}}
+        <br>
+        <span class="tags">{{ result.Year }}</span>
+      </p>
+  </ul>
+</section>
